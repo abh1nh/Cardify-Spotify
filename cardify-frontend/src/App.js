@@ -1,9 +1,8 @@
 import Navbar from './Navbar';
-import Home from './Home';
 import HomePage from './HomePage';
 import LoginPage from './LoginPage';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 function App() {
 
