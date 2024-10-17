@@ -10,6 +10,8 @@
   color: #333;
 }
 
+/*navbar*/
+
 .navbar {
   padding: 20px;
   display: flex;
@@ -32,8 +34,81 @@
 .navbar a:hover {
   color: #f1356d;
 }
+
+/*content*/
+
 .content {
   max-width: 800px;
   margin: 40px auto;
   padding: 20px;
 }
+
+/* Login page */
+.loginpage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 50px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.loginpage .spotify-logo {
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+
+.loginpage h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+
+.loginpage p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #666;
+}
+
+.loginpage .spotify-login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1db954;
+  color: white;
+  font-size: 1.1rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.loginpage .spotify-login-button:hover {
+  background-color: #17a74b;
+}
+
+
+.loginpage .spotify-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+/* Homepage */
+
+/*
+.homepage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 50px;
+}
+*/

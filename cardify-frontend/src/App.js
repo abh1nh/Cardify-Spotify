@@ -1,23 +1,35 @@
 import Navbar from './Navbar';
 import Home from './Home';
 import HomePage from './HomePage';
+import LoginPage from './LoginPage';
 
+import React, { useState, useEffect } from 'react';
 
 function App() {
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   return (
     <div className="App">
-      <Navbar />
 
-      
+        <Navbar />
+
       <div className='content'>
-        <Home />
+
+        {!isAuthenticated ? (
+          <div className='loginpage'>
+            <LoginPage setIsAuthenticated={setIsAuthenticated} />
+          </div>
+
+        ) : (
+          <div className='homepage'>
+            <HomePage />
+          </div>
+        )}
+
       </div>
 
-      <div className='homePage'>
-
-      </div>
-        <HomePage />  
-      </div>
+    </div>
   );
 }
 
