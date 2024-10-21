@@ -10,9 +10,18 @@ const cors = require('cors'); // Import CORS middleware
 // Initialize an Express application.
 const app = express();
 
+
+//
+app.use(session({
+    secret: '8KzP@J4xQ3u&dW2!e9Lt^bC8$sXy5HcQ', // Replace with your own secret
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }  // Set to true if you are using HTTPS
+}));
+
 // Use CORS middleware to allow requests from any origin
 app.use(cors({
-    origin: 'https://cardifyme.netlify.app/',  // Replace with your frontend's origin
+    origin: 'https://cardifyme.netlify.app',  // Replace with your frontend's origin
     credentials: true  // Enable credentials (i.e., cookies) to be sent along with requests
 }));
 
