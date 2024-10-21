@@ -10,7 +10,7 @@ const LoginPage = ({ setIsAuthenticated }) => {
 
         // Once authentication is confirmed (in the real flow this happens after redirect)
         // setIsAuthenticated should be called to update the app state
-        setIsAuthenticated(true);
+        //setIsAuthenticated(true);
     };
 
     return (

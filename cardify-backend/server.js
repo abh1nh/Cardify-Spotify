@@ -16,7 +16,7 @@ app.use(session({
     secret: '8KzP@J4xQ3u&dW2!e9Lt^bC8$sXy5HcQ', // Replace with your own secret
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true }  // Set to true if you are using HTTPS
+    cookie: { secure: false }  // Set to true if you are using HTTPS
 }));
 
 // Use CORS middleware to allow requests from any origin
@@ -45,11 +45,15 @@ app.get('/login', (req, res) => {
     const scopes = ['user-read-private', 'user-read-email', 'user-read-playback-state', 'user-modify-playback-state', 'user-top-read'];
     // Redirect the client to Spotify's authorization page with the defined scopes.
     res.redirect(spotifyApi.createAuthorizeURL(scopes));
+
+    console.log("login route hit")
 });
 
 // Route handler for the callback endpoint after the user has logged in.
 // Route handler for the callback endpoint after the user has logged in.
 app.get('/callback', (req, res) => {
+    console.log("callback route hit")
+
     const error = req.query.error;
     const code = req.query.code;
 
@@ -67,6 +71,9 @@ app.get('/callback', (req, res) => {
         // Store the tokens in the session
         req.session.accessToken = accessToken;
         req.session.refreshToken = refreshToken;
+
+        //console.log(accessToken);
+        //console.log(refreshToken);
 
         spotifyApi.setAccessToken(accessToken);
         spotifyApi.setRefreshToken(refreshToken);
@@ -107,6 +114,14 @@ app.get('/getTopArtists', (req, res) => {
         console.error('Error fetching top artists:', err);
         res.status(500).send('Error fetching top artists');
     });
+});
+
+app.get('/checkAuth', (req, res) => {
+    if (req.session.accessToken) {
+        res.json({ isAuthenticated: true });
+    } else {
+        res.json({ isAuthenticated: false });
+    }
 });
 
 
