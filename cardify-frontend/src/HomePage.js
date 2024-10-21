@@ -9,13 +9,15 @@ const HomePage = () => {
   // Fetch top artists whenever the time range changes
     useEffect(() => {
         if (timeRange) {
-        axios.get(`http://localhost:8888/getTopArtists?time_range=${timeRange}`)
-            .then(response => {
+        axios.get(`http://localhost:8888/getTopArtists?time_range=${timeRange}`, {
+            withCredentials: true
+        })
+        .then(response => {
             setTopArtists(response.data);
-            })
-            .catch(error => {
+        })
+        .catch(error => {
             console.error('Error fetching top artists:', error);
-            });
+        });
         }
     }, [timeRange]);
 

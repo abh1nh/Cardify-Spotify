@@ -3,6 +3,7 @@ require('dotenv').config();
 
 // Import the necessary modules.
 const express = require('express');
+const session = require('express-session');
 const SpotifyWebApi = require('spotify-web-api-node');
 const cors = require('cors'); // Import CORS middleware
 
@@ -10,7 +11,10 @@ const cors = require('cors'); // Import CORS middleware
 const app = express();
 
 // Use CORS middleware to allow requests from any origin
-app.use(cors());  // Allow all origins by default
+app.use(cors({
+    origin: 'https://cardifyme.netlify.app/',  // Replace with your frontend's origin
+    credentials: true  // Enable credentials (i.e., cookies) to be sent along with requests
+}));
 
 // Define the port number on which the server will listen.
 const port = 8888;
@@ -51,6 +55,10 @@ app.get('/callback', (req, res) => {
         const accessToken = data.body['access_token'];
         const refreshToken = data.body['refresh_token'];
 
+        // Store the tokens in the session
+        req.session.accessToken = accessToken;
+        req.session.refreshToken = refreshToken;
+
         spotifyApi.setAccessToken(accessToken);
         spotifyApi.setRefreshToken(refreshToken);
 
@@ -67,6 +75,15 @@ app.get('/callback', (req, res) => {
 app.get('/getTopArtists', (req, res) => {
     const timeRange = req.query.time_range || 'short_term'; // Default to short_term (4 weeks)
 
+    // Check if the access token exists in the session
+    if (!req.session.accessToken) {
+        return res.status(401).send('No access token in session');
+    }
+
+    // Set the access token on the Spotify API instance
+    spotifyApi.setAccessToken(req.session.accessToken);
+
+    // Fetch the user's top artists
     spotifyApi.getMyTopArtists({ time_range: timeRange, limit: 6 }).then(topArtistData => {
         const topArtists = topArtistData.body.items.map(artist => ({
             name: artist.name,
@@ -85,7 +102,15 @@ app.get('/getTopArtists', (req, res) => {
 
 
 
+// Start the Express server.
+app.listen(port, () => {
+    console.log(`Listening at http://localhost:${port}`);
+});
 
+
+
+
+/*
 // Route handler for the search endpoint.
 app.get('/search', (req, res) => {
     // Extract the search query parameter.
@@ -116,8 +141,4 @@ app.get('/play', (req, res) => {
         res.send('Error occurred during playback');
     });
 });
-
-// Start the Express server.
-app.listen(port, () => {
-    console.log(`Listening at http://localhost:${port}`);
-});
+*/

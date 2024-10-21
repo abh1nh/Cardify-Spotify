@@ -7,7 +7,8 @@ import React, { useState } from 'react';
 function App() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+  console.log(isAuthenticated);
+  
   return (
     <div className="App">
 
