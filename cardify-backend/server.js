@@ -124,7 +124,21 @@ app.get('/checkAuth', (req, res) => {
     }
 });
 
+// server.js
 
+app.post('/logout', (req, res) => {
+    // Destroy the session and clear cookies
+    req.session.destroy(err => {
+      if (err) {
+        return res.status(500).send('Error logging out');
+      }
+  
+      // Clear the session cookie
+      res.clearCookie('connect.sid');  // 'connect.sid' is the default cookie name for express-session
+      res.sendStatus(200);  // Respond with success
+    });
+  });
+  
 
 // Start the Express server.
 app.listen(port, () => {

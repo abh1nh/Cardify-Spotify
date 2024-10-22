@@ -25,13 +25,23 @@ function App() {
       });
   }, []);
 
-
-  console.log(isAuthenticated);
+  const handleLogout = () => {
+    // Make a request to the backend to log the user out
+    axios.post('http://localhost:8888/logout', {}, { withCredentials: true })
+      .then(() => {
+        // On success, clear the frontend state and redirect the user to the login page
+        setIsAuthenticated(false);
+        window.location.href = '/';  // Redirect to the login page
+      })
+      .catch(error => {
+        console.error('Error logging out:', error);
+      });
+  };
   
   return (
     <div className="App">
 
-        <Navbar />
+      <Navbar handleLogout={handleLogout}/>
 
       <div className='content'>
 
