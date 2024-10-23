@@ -6,16 +6,14 @@ import React, { useState, useEffect } from 'react';
 
 import axios from 'axios';
 
-const localURL = process.env.REACT_APP_LOCAL_URL;
+//const localURL = process.env.REACT_APP_LOCAL_URL;
 const piURL = process.env.REACT_APP_PI_URL;
 
 console.log(piURL);
-console.log(localURL);
+//console.log(localURL);
 
 function App() {
 
-  
-  
 
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);

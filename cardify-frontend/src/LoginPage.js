@@ -1,6 +1,6 @@
 import React from 'react';
 
-const localURL = process.env.REACT_APP_LOCAL_URL;
+//const localURL = process.env.REACT_APP_LOCAL_URL;
 const piURL = process.env.REACT_APP_PI_URL;
 
 const LoginPage = ({ setIsAuthenticated }) => {
