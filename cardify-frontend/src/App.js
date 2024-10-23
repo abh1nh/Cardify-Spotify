@@ -6,15 +6,24 @@ import React, { useState, useEffect } from 'react';
 
 import axios from 'axios';
 
+const localURL = process.env.REACT_APP_LOCAL_URL;
+const piURL = process.env.REACT_APP_PI_URL;
+
+console.log(piURL);
+console.log(localURL);
 
 function App() {
+
+  
+  
+
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   //
   useEffect(() => {
     // Check if the user is authenticated by making a request to the backend
-    axios.get('http://localhost:8888/checkAuth', { withCredentials: true })
+    axios.get(piURL+'checkAuth', { withCredentials: true })
       .then(response => {
         if (response.data.isAuthenticated) {
           setIsAuthenticated(true);
@@ -27,7 +36,7 @@ function App() {
 
   const handleLogout = () => {
     // Make a request to the backend to log the user out
-    axios.post('http://localhost:8888/logout', {}, { withCredentials: true })
+    axios.post(piURL+'logout', {}, { withCredentials: true })
       .then(() => {
         // On success, clear the frontend state and redirect the user to the login page
         setIsAuthenticated(false);

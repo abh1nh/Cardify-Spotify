@@ -1,8 +1,13 @@
 import React from 'react';
 
+const localURL = process.env.REACT_APP_LOCAL_URL;
+const piURL = process.env.REACT_APP_PI_URL;
+
 const LoginPage = ({ setIsAuthenticated }) => {
 
-    const loginUrl = "http://localhost:8888/login";
+    const loginUrl = piURL+"login";
+
+    console.log(loginUrl)
 
     const handleLogin = () => {
         // Simulate the login flow; you'd likely want to send the user to the login URL
