@@ -6,10 +6,12 @@ const HomePage = () => {
     const [timeRange, setTimeRange] = useState('short_term');  // Default to short_term
     const [topArtists, setTopArtists] = useState([]);
 
+    const piURL = process.env.REACT_APP_PI_URL;
+    console.log(piURL+`getTopArtists?time_range=${timeRange}`);
   // Fetch top artists whenever the time range changes
     useEffect(() => {
         if (timeRange) {
-        axios.get(`http://localhost:8888/getTopArtists?time_range=${timeRange}`, {
+        axios.get(piURL+`getTopArtists?time_range=${timeRange}`, {
             withCredentials: true
         })
         .then(response => {
