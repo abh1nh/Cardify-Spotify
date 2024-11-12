@@ -11,7 +11,7 @@ const LoginPage = ({ setIsAuthenticated }) => {
 
     const handleLogin = () => {
         // Simulate the login flow; you'd likely want to send the user to the login URL
-        window.location.href = loginUrl;
+        window.location.href = process.env.REACT_APP_PI_URL+"login";
 
         // Once authentication is confirmed (in the real flow this happens after redirect)
         // setIsAuthenticated should be called to update the app state
